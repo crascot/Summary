@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import { content } from '../content/content';
 import s from './skills.module.css';
 
 
 const Skills = () => {
+    const [variable, setVariable] = useState('h3');
+
+    useEffect(() => {
+        if (window.innerWidth <= 400) setVariable('h4');
+        else setVariable('h3');
+    }, []);
+
     const skills = content.skills.map((el, i) => (
         <div key={i}>
             <Typography className={s.name} variant="h5" fontWeight={700}>
@@ -21,7 +28,7 @@ const Skills = () => {
 
     return (
         <div className={s.skills}>
-            <Typography variant="h2" className={s.title}>
+            <Typography variant={variable} className={s.title}>
                 Навыки
             </Typography>
             {skills}
